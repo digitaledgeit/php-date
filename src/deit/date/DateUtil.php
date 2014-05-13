@@ -14,7 +14,7 @@ class DateUtil {
 	 * @param   \DateTime|int $now
 	 * @return  \DateTime[]
 	 */
-	public function getFinancialYear($now = null) {
+	static public function getFinancialYear($now = null) {
 
 		if (is_null($now)) {
 			$now = time();
@@ -33,8 +33,6 @@ class DateUtil {
 			$startYear = date('Y', $now)-1;
 		}
 
-		var_dump(date('Y-m-d', $now), $startYear);
-
 		return [
 			'start' => date('Y-m-d', mktime(0, 0, 0, 7, 1, $startYear)),
 			'end'   => date('Y-m-d', mktime(0, 0, 0, 6, 30, $startYear+1)),
@@ -47,8 +45,8 @@ class DateUtil {
 	 * @param   int $offset
 	 * @return  \DateTime[]
 	 */
-	public function getFinancialYearFromOffset($offset) {
-		return $this->getFinancialYear(mktime(
+	static public function getFinancialYearFromOffset($offset) {
+		return self::getFinancialYear(mktime(
 			0, 0, 0, date('n'), date('j'), date('Y')+$offset
 		));
 	}
